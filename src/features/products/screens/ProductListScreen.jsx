@@ -24,7 +24,7 @@ const ProductListScreen = () => {
             <TextZSR fontSize={11} fontWeight='Bold' themeKey='TAB_BAR_TEXT'>DELIVERY TO</TextZSR>
             <View style={styles.dropdownContainer}>
               <TextZSR fontSize={14} themeKey='BLACK_1'>Green Way 300, Sylhet</TextZSR>
-              <IconSvg icon={DropdownIcon} size={12} active showBackground={false} />
+              <IconSvg icon={DropdownIcon} size={11} active showBackground={false} />
             </View>
           </View>
 
@@ -32,7 +32,7 @@ const ProductListScreen = () => {
             <TextZSR fontSize={11} fontWeight='Bold' themeKey='TAB_BAR_TEXT'>WITHIN</TextZSR>
             <View style={styles.dropdownContainer}>
               <TextZSR fontSize={14} themeKey='BLACK_1'>1 hour</TextZSR>
-              <IconSvg icon={DropdownIcon} size={12} active showBackground={false} />
+              <IconSvg icon={DropdownIcon} size={11} active showBackground={false} />
             </View>
           </View>
 
@@ -63,6 +63,6 @@ const useStyles = makeStyles((theme) => ({
   dropdownContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    // gap: RFValue(4)
+    gap: RFValue(8)
   }
 }))
