@@ -4,6 +4,7 @@ import React from 'react';
 import { StyleSheet, Text, } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
+import { FONTS } from './src/utils/fonts';
 
 function App() {
 
@@ -13,7 +14,7 @@ function App() {
 
         <NavigationContainer>
 
-          <Text>Welcome to Plena</Text>
+          <Text style={{ fontFamily: FONTS.Manrope?.ManropeExtraBold }}  >Welcome to Plena</Text>
         </NavigationContainer>
 
       </SafeAreaView>
