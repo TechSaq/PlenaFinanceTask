@@ -12,11 +12,12 @@ type IconSvgProps = {
   size?: number;
   active?: boolean;
   icon: SVGString,
-  containerStyle?: ViewStyle
+  containerStyle?: ViewStyle,
+  showBackground?: boolean
 }
 
 // render svg icon which take object of SVGString type
-const IconSvg = ({ size, active = false, icon, containerStyle }: IconSvgProps) => {
+const IconSvg = ({ size, active = false, icon, containerStyle, showBackground = true }: IconSvgProps) => {
 
   size = RFValue(size || 24);
 
@@ -24,8 +25,8 @@ const IconSvg = ({ size, active = false, icon, containerStyle }: IconSvgProps) =
 
   return (
     <View style={{
-      backgroundColor: active ? "#1e222b" : 'transparent',
-      padding: RFValue(16),
+      backgroundColor: active && showBackground ? "#1e222b" : 'transparent',
+      padding: RFValue(showBackground ? 16 : 0),
       borderRadius: RFValue(100),
       ...containerStyle
     }}

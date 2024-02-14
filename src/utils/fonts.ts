@@ -20,5 +20,5 @@ export const FONTS = {
       ManropeBold: "ManropeBold",
       ManropeExtraBold: "ManropeExtraBold",
     }
-  })
+  }) as Record<string, string>
 }
