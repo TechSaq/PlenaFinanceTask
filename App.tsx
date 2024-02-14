@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { FONTS } from './src/utils/fonts';
 import { IconSvg } from './src/library';
 import { HomeIcon } from './src/assets/icons';
+import { AppNavigation } from './src/navigation';
 
 function App() {
 
@@ -14,13 +15,7 @@ function App() {
     <SafeAreaProvider>
       <SafeAreaView style={{ flex: 1 }} >
 
-        <NavigationContainer>
-
-          <Text style={{ fontFamily: FONTS.Manrope?.ManropeExtraBold }}  >Welcome to Plena</Text>
-
-        </NavigationContainer>
-
-        <IconSvg icon={HomeIcon} size={200} active />
+        <AppNavigation />
 
       </SafeAreaView>
     </SafeAreaProvider>
