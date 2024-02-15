@@ -1,9 +1,12 @@
+//@ts-nocheck
 import { Pressable, View } from 'react-native'
 import React from 'react'
 import { IconSvg, TextZSR } from '../library'
 import { BasketIcon } from '../assets/icons'
 import { makeStyles } from '../hooks'
 import { RFValue } from 'react-native-responsive-fontsize'
+import { useNavigation } from '@react-navigation/native'
+import { SCREEN_CONSTANTS } from '../navigation/utils/constants'
 
 type HeaderBasketIconProps = {
   active?: boolean
@@ -15,8 +18,17 @@ const HeaderBasketIcon = ({ active = true }: HeaderBasketIconProps) => {
 
   const styles = useStyles();
 
+  const navigation = useNavigation();
+
+  const navigateToCart = () => {
+
+    // TODO: better typescript
+    navigation.navigate(SCREEN_CONSTANTS.Cart);
+
+  }
+
   return (
-    <Pressable style={styles.container} >
+    <Pressable style={styles.container} onPress={navigateToCart} >
       <IconSvg
         icon={BasketIcon}
         size={20}

@@ -9,6 +9,8 @@ import { ImageIcon } from "./ImageIcon";
 import { FavouriteProductIcon } from "./FavouriteProductIcon";
 import { AddToCartPlusIcon } from "./AddToCartPlusIcoc";
 import { BackIcon } from "./BackIcon";
+import { MinusCartIcon } from "./MinusCartIcon";
+import { PlusCartIcon } from "./PlusCartIcon";
 
 export {
   HomeIcon,
@@ -21,5 +23,7 @@ export {
   ImageIcon,
   FavouriteProductIcon,
   AddToCartPlusIcon,
-  BackIcon
+  BackIcon,
+  MinusCartIcon,
+  PlusCartIcon
 }

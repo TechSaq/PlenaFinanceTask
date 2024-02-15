@@ -1,4 +1,4 @@
-import { View, Text, Button, ButtonProps, Pressable, PressableProps } from 'react-native'
+import { Pressable, PressableProps } from 'react-native'
 import React from 'react'
 import { makeStyles } from '../../hooks';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -13,7 +13,7 @@ const ButtonZSR = ({ children, mode = 'contained' }: ButtonZSRProps) => {
   const styles = useStyles();
 
   return (
-    <Pressable style={[styles.container, styles[mode]]} >
+    <Pressable style={[styles.container, styles[mode]]}>
       <TextZSR
         fontSize={14}
         fontWeight='SemiBold'
@@ -30,10 +30,10 @@ export default ButtonZSR;
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    borderRadius: RFValue(24),
+    borderRadius: RFValue(22),
     paddingHorizontal: RFValue(28),
     paddingVertical: RFValue(16),
-    flex: 1,
+    // flex: 1,
     borderWidth: RFValue(1),
     borderColor: theme.colors.PRIMARY
   },

@@ -4,17 +4,27 @@ import { makeStyles } from '../../hooks'
 
 type ScreenViewProps = {
   children: JSX.Element | JSX.Element[],
+  scrollView?: boolean,
   style?: ViewStyle
 }
 
-const ScreenView = ({ children, style }: ScreenViewProps) => {
+const ScreenView = ({ children, scrollView = false, style }: ScreenViewProps) => {
 
   const styles = useStyles({ style });
 
   return (
-    <ScrollView style={styles.container} >
-      {children}
-    </ScrollView>
+    <>
+      {
+        scrollView
+          ? <ScrollView style={styles.container} >
+            {children}
+          </ScrollView>
+          : <View style={styles.container} >
+            {children}
+          </View>
+      }
+    </>
+
   )
 }
 

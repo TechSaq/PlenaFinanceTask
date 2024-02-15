@@ -8,6 +8,7 @@ import { IconSvg } from '../../../library'
 import { BackIcon, BasketIcon, HomeIcon } from '../../../assets/icons'
 import { HeaderBasketIcon } from '../../../components'
 import { RFValue } from 'react-native-responsive-fontsize'
+import { CartScreen } from '../../cart'
 
 const ProductNavigationStack = () => {
   return (
@@ -54,6 +55,35 @@ const ProductNavigationStack = () => {
             paddingTop: RFValue(20),
             paddingRight: RFValue(24),
             marginTop: RFValue(4)
+          }
+        }}
+      />
+      <Stack.Screen
+        name={SCREEN_CONSTANTS.Cart}
+        component={CartScreen}
+        initialParams={{ products: [] }}
+        options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          headerTitle: 'Shopping Cart',
+          headerLeft: (props) => {
+            return (
+              <Pressable onPress={props.onPress} >
+                <IconSvg
+                  icon={BackIcon}
+                  size={40}
+                />
+              </Pressable>
+            )
+          },
+          headerStyle: {
+            height: RFValue(64),
+          },
+          headerLeftContainerStyle: {
+            paddingTop: RFValue(20)
+          },
+          headerTitleContainerStyle: {
+            paddingTop: RFValue(20),
           }
         }}
       />
