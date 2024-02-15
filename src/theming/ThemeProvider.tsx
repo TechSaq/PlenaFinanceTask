@@ -22,6 +22,7 @@ export type ThemeType = {
     PRIMARY_1: string,
     SECONDARY: string,
     SECONDARY_1: string,
+    SECONDARY_2: string,
 
     BLACK_100: string,
     BLACK_90: string,

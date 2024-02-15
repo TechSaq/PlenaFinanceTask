@@ -1,4 +1,4 @@
-import { Text, TextProps } from 'react-native'
+import { Text, TextProps, TextStyle } from 'react-native'
 import React from 'react'
 import { makeStyles } from '../../hooks';
 import { FONTS } from '../../utils/fonts';
@@ -6,13 +6,14 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { ThemeType } from '../../theming';
 
 
-type FontWeight = 'Bold' | 'SemiBold' | 'Medium' | 'Regular'
+type FontWeight = 'ExtraBold' | 'Bold' | 'SemiBold' | 'Medium' | 'Regular'
 
 type TextZSRProps = TextProps & {
   fontSize?: number;
   fontWeight?: FontWeight;
   color?: string;
   themeKey?: keyof ThemeType['colors'];
+  style?: TextStyle
 }
 
 const TextZSR = ({
@@ -21,11 +22,12 @@ const TextZSR = ({
   fontWeight = 'Regular',
   color,
   themeKey = "BLACK_100",
+  style,
   ...rest
 }: TextZSRProps
 ) => {
 
-  const styles = useStyles({ fontSize, fontWeight, color, themeKey });
+  const styles = useStyles({ fontSize, fontWeight, color, themeKey, style });
 
   if (!children) return null;
 
@@ -41,13 +43,15 @@ type StylesProps = {
   fontWeight: FontWeight;
   color: string;
   themeKey?: keyof ThemeType['colors'];
+  style?: TextStyle
 };
 
 
-const useStyles = makeStyles((theme, { fontSize, fontWeight, color, themeKey }: StylesProps) => ({
+const useStyles = makeStyles((theme, { fontSize, fontWeight, color, themeKey, style }: StylesProps) => ({
   text: {
     color: color || theme.colors[themeKey || "BLACK_100"],
     fontFamily: FONTS.Manrope[`Manrope${fontWeight}`],
-    fontSize: RFValue(fontSize)
+    fontSize: RFValue(fontSize),
+    ...style,
   }
 }))

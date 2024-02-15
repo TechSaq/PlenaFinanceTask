@@ -1,10 +1,11 @@
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import React from 'react';
 import { HomeHeader } from '../../home';
-import { ScreenView, SearchInput, TextZSR, IconSvg } from '../../../library';
+import { ScreenView, SearchInput, TextZSR, IconSvg, Spacer } from '../../../library';
 import { makeStyles } from '../../../hooks';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { DropdownIcon, MoreVerticalIcon } from '../../../assets/icons'
+import { DropdownIcon } from '../../../assets/icons'
+import { ProductListing, ProductOfferCarousel } from '../components';
 
 const ProductListScreen = () => {
 
@@ -37,8 +38,21 @@ const ProductListScreen = () => {
           </View>
 
         </View>
-
       </View>
+
+      <Spacer spacing={16} />
+
+      <View style={{ paddingHorizontal: RFValue(16) }}>
+        <ProductOfferCarousel />
+      </View>
+
+      <Spacer spacing={16} />
+
+      <View style={{ paddingHorizontal: RFValue(16) }}>
+        <ProductListing />
+      </View>
+
+
     </ScreenView>
   )
 }

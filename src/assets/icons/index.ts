@@ -5,6 +5,10 @@ import { MoreVerticalIcon } from "./MoreVerticalIcon";
 import { BasketIcon } from "./BasketIcon";
 import { SearchIcon } from "./SearchIcon";
 import { DropdownIcon } from "./DropdownIcon";
+import { ImageIcon } from "./ImageIcon";
+import { FavouriteProductIcon } from "./FavouriteProductIcon";
+import { AddToCartPlusIcon } from "./AddToCartPlusIcoc";
+import { BackIcon } from "./BackIcon";
 
 export {
   HomeIcon,
@@ -13,5 +17,9 @@ export {
   MoreVerticalIcon,
   BasketIcon,
   SearchIcon,
-  DropdownIcon
+  DropdownIcon,
+  ImageIcon,
+  FavouriteProductIcon,
+  AddToCartPlusIcon,
+  BackIcon
 }

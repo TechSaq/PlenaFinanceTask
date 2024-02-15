@@ -4,6 +4,7 @@ export const DarkColorTheme = {
     PRIMARY_1: "#153075",
     SECONDARY: "#F9B023",
     SECONDARY_1: "#FFC83A",
+    SECONDARY_2: "#E4DDCB",
 
     BLACK_100: "#1B262E",
     BLACK_90: "#354349",

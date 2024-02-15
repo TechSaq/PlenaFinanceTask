@@ -3,7 +3,7 @@ import React from 'react'
 import { makeStyles } from '../../hooks'
 
 type ScreenViewProps = {
-  children: JSX.Element,
+  children: JSX.Element | JSX.Element[],
   style?: ViewStyle
 }
 
@@ -23,7 +23,7 @@ export default ScreenView;
 const useStyles = makeStyles((theme, { style }) => ({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.BLACK_1,
+    backgroundColor: '#fff',
     ...style
   }
 }))
