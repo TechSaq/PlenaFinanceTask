@@ -13,6 +13,7 @@ import { getDiscount } from '../../../utils/helpers';
 import { useAddItemToCartMutation } from '../../cart/query';
 import { SCREEN_CONSTANTS } from '../../../navigation/utils/constants';
 import { getItemsFromCartLS } from '../../../utils/LocalStorageHelpers';
+import { useFavouriteActions, useFavouriteState } from '../../favourite/store';
 
 const ProductDetailsScreen = () => {
 
@@ -22,6 +23,10 @@ const ProductDetailsScreen = () => {
   const { product } = params as { product: Product };
 
   const navigation = useNavigation();
+
+  const favItems = useFavouriteState();
+  const { addToFavourite, removeFromFavourite } = useFavouriteActions();
+  const isFavProduct = !!favItems.find(f => f.id === product.id);
 
   const { mutate: addItemToCart } = useAddItemToCartMutation();
 
@@ -50,6 +55,10 @@ const ProductDetailsScreen = () => {
 
   }
 
+  const handleFavouriteAction = () => {
+    isFavProduct ? removeFromFavourite(product) : addToFavourite(product);
+  }
+
 
   return (
     <ScreenView style={styles.container}>
@@ -72,11 +81,14 @@ const ProductDetailsScreen = () => {
       <Spacer />
 
       <View>
-        <Pressable style={styles.favouriteIconWrapper} >
+        <Pressable
+          style={styles.favouriteIconWrapper}
+          onPress={handleFavouriteAction}
+        >
           <IconSvg
             size={16}
             icon={FavouriteProductIcon}
-            active={false}
+            active={isFavProduct}
             showBackground={false}
           />
         </Pressable>

@@ -50,10 +50,10 @@ export const useAddItemToCartMutation = () => {
   return useMutation({
     mutationFn: addItemToCart,
     onSuccess: async () => {
-      Toast.show({
-        type: "success",
-        text1: 'Item added to cart.'
-      });
+      // Toast.show({
+      //   type: "success",
+      //   text1: 'Item added to cart.'
+      // });
 
       await queryClient.cancelQueries({ queryKey: cartItemQueryKeys.all });
     },

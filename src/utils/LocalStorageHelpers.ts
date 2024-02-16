@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CartItem } from "../features/cart/screens/CartScreen";
+import Toast from "react-native-toast-message";
 
 export const LocalStorageConstants = {
   APP_THEME_MODE: 'appThemeMode',
@@ -42,6 +43,20 @@ export const addItemToCartLS = async (item: CartItem, qty = 1) => {
   // new qty
   // add check for qty=0 and remove for it
   const updatedItemQty = foundItem ? foundItem.qty + qty : item.qty;
+
+  if (!foundItem?.qty && updatedItemQty === 1) {
+    Toast.show({
+      type: "success",
+      text1: `${item.title} added to cart.`
+    });
+  }
+
+  // if (updatedItemQty === 0) {
+  //   Toast.show({
+  //     type: "success",
+  //     text1: 'Item removed from cart.'
+  //   });
+  // }
 
   // new updated item
   const itemToAdd = {
