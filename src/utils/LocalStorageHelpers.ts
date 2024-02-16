@@ -33,42 +33,29 @@ export const addItemToCartLS = async (item: CartItem, qty = 1) => {
   // get all items
   const cartItemsLS = await getItemsFromCartLS<CartItem[]>();
 
-  // find the item
+  // result cart items
+  let updatedItems = cartItemsLS;
 
+  // find the item
   const foundItem = cartItemsLS.find(i => i.id === item.id);
 
-  // filtering out if already present to prevent duplicate
-  const filteredOutFoundItem = cartItemsLS.filter(i => i.id !== item.id);
+  if (foundItem) {
+    // item is already present
+    // update the quantity
 
-  // new qty
-  // add check for qty=0 and remove for it
-  const updatedItemQty = foundItem ? foundItem.qty + qty : item.qty;
+    updatedItems = cartItemsLS.map(i => i.id === item.id ? ({ ...foundItem, qty: foundItem.qty + qty }) : i);
 
-  if (!foundItem?.qty && updatedItemQty === 1) {
+  } else {
+    // new item is being added
+    updatedItems = [item, ...cartItemsLS];
     Toast.show({
       type: "success",
       text1: `${item.title} added to cart.`
     });
   }
 
-  // if (updatedItemQty === 0) {
-  //   Toast.show({
-  //     type: "success",
-  //     text1: 'Item removed from cart.'
-  //   });
-  // }
-
-  // new updated item
-  const itemToAdd = {
-    ...item,
-    qty: updatedItemQty
-  };
-
-  // include and filter out if qty<=0
-  const updatedItems = [
-    itemToAdd,
-    ...filteredOutFoundItem
-  ].filter(i => i.qty >= 1);
+  // filter out if qty<=0
+  updatedItems = updatedItems.filter(i => i.qty >= 1);
 
   await LocalStorage.setItem<CartItem[]>(LocalStorageConstants.CART_ITEMS, updatedItems);
 

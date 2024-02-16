@@ -66,7 +66,7 @@ const BottomTabNavigation = () => {
 
           headerShown: true,
           headerShadowVisible: false,
-          headerTitle: 'Shopping Cart',
+          headerTitle: 'Favourites',
           headerLeft: (props) => {
             return (
               <Pressable onPress={navigation.goBack} >
