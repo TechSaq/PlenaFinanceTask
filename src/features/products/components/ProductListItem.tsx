@@ -9,12 +9,18 @@ import { Product } from './ProductListing';
 import { useNavigation } from '@react-navigation/native';
 import { SCREEN_CONSTANTS } from '../../../navigation/utils/constants';
 import { useAddItemToCartMutation } from '../../cart/query';
+import { useFavouriteActions, useFavouriteState } from '../../favourite/store';
 
 const ProductListItem = ({ product }: { product: Product }) => {
 
   const styles = useStyles();
 
   const navigation = useNavigation();
+
+  const favItems = useFavouriteState();
+  const { addToFavourite, removeFromFavourite } = useFavouriteActions();
+
+  const isFavProduct = !!favItems.find(f => f.id === product.id);
 
   const { mutate: addItemToCart } = useAddItemToCartMutation();
 
@@ -27,17 +33,24 @@ const ProductListItem = ({ product }: { product: Product }) => {
     addItemToCart({ item: product });
   }
 
+  const handleFavouriteAction = () => {
+    isFavProduct ? removeFromFavourite(product) : addToFavourite(product);
+  }
+
   return (
     <Pressable style={styles.container} onPress={navigateToProductDetails} >
 
       {/* background container added to favourite icon
           to make it visible on all kind of images.
       */}
-      <Pressable style={styles.favouriteIconWrapper} >
+      <Pressable
+        style={styles.favouriteIconWrapper}
+        onPress={handleFavouriteAction}
+      >
         <IconSvg
           size={16}
           icon={FavouriteProductIcon}
-          active={false}
+          active={isFavProduct}
           showBackground={false}
         />
       </Pressable>

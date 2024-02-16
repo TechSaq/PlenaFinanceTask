@@ -18,11 +18,6 @@ export type Product = {
   images: string[];
 }
 
-type ProductQueryResult = {
-  data: Product[],
-  isLoading: boolean
-}
-
 const ProductListing = () => {
 
   const { data, isLoading, isFetching } = useProductInfiniteQuery();
