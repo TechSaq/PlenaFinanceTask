@@ -2,7 +2,7 @@ import { View, Text, FlatList } from 'react-native'
 import React from 'react'
 import { useProductInfiniteQuery } from '../query';
 import ProductListItem from './ProductListItem';
-import { Spacer } from '../../../library';
+import { Spacer, TextZSR } from '../../../library';
 
 export type Product = {
   id: number;
@@ -19,21 +19,31 @@ export type Product = {
 }
 
 type ProductQueryResult = {
-  data: Product[]
+  data: Product[],
+  isLoading: boolean
 }
 
 const ProductListing = () => {
 
-  const { data }: ProductQueryResult = useProductInfiniteQuery();
+  const { data, isLoading, isFetching } = useProductInfiniteQuery();
+
 
   return (
     <View>
+      {/* {
+        isLoading ? <TextZSR>Loading...</TextZSR> : null
+      }
+      {
+        isFetching ? <TextZSR> isFetching...</TextZSR> : null
+      } */}
       <FlatList
         data={data}
         horizontal={false}
+        keyExtractor={(item) => item.id}
         numColumns={2}
         ItemSeparatorComponent={Spacer}
         renderItem={({ item }) => <ProductListItem product={item} />}
+
       />
     </View>
   )

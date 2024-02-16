@@ -8,6 +8,7 @@ import { AddToCartPlusIcon, FavouriteProductIcon } from '../../../assets/icons';
 import { Product } from './ProductListing';
 import { useNavigation } from '@react-navigation/native';
 import { SCREEN_CONSTANTS } from '../../../navigation/utils/constants';
+import { useAddItemToCartMutation } from '../../cart/query';
 
 const ProductListItem = ({ product }: { product: Product }) => {
 
@@ -15,12 +16,15 @@ const ProductListItem = ({ product }: { product: Product }) => {
 
   const navigation = useNavigation();
 
+  const { mutate: addItemToCart } = useAddItemToCartMutation();
+
   const navigateToProductDetails = () => {
-
-    // console.log("navigate me: ", product)
-
     // TODO: add typescript for navigations
     navigation.navigate(SCREEN_CONSTANTS.ProductDetails, { product });
+  }
+
+  const handleAddToCart = () => {
+    addItemToCart({ item: product });
   }
 
   return (
@@ -56,11 +60,15 @@ const ProductListItem = ({ product }: { product: Product }) => {
           <Spacer spacing={4} />
           <TextZSR fontSize={12}>{product.title}</TextZSR>
         </View>
-        <IconSvg
-          icon={AddToCartPlusIcon}
-          showBackground={false}
-          active
-        />
+
+        <Pressable onPress={handleAddToCart} >
+          <IconSvg
+            icon={AddToCartPlusIcon}
+            showBackground={false}
+            active
+          />
+        </Pressable>
+
       </View>
 
     </Pressable>

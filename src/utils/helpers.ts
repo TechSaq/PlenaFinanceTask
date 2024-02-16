@@ -12,3 +12,19 @@ export const getDiscount = (price: Price, discountPercentage: Price) => {
   return discount;
 
 }
+
+export const getTotal = (numbers: string[] = []) => {
+
+  const sum = numbers.reduce((result, num) => {
+
+    const _num = Number(num);
+
+    result = parseFloat(result.toString()) + parseFloat(_num.toString());
+
+    return result;
+
+  }, 0);
+
+  return parseFloat(sum.toString()).toFixed(2);
+
+}

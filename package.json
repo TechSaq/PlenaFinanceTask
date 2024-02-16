@@ -25,7 +25,9 @@
     "react-native-screens": "^3.29.0",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-star-rating-widget": "^1.7.3",
-    "react-native-svg": "^14.1.0"
+    "react-native-svg": "^14.1.0",
+    "react-native-toast-message": "^2.2.0",
+    "zustand": "^4.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

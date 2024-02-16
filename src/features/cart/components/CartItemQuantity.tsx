@@ -1,27 +1,40 @@
-import { View, Text } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import React from 'react'
 import { IconSvg, TextZSR } from '../../../library'
 import { MinusCartIcon, PlusCartIcon } from '../../../assets/icons'
 import { makeStyles } from '../../../hooks'
 import { RFValue } from 'react-native-responsive-fontsize'
+import { CartItem } from '../screens/CartScreen'
+import { useAddItemToCartMutation } from '../query'
 
-const CartItemQuantity = () => {
+type CartItemQuantityProps = {
+  item: CartItem
+}
+
+const CartItemQuantity = ({ item }: CartItemQuantityProps) => {
 
   const styles = useStyles();
 
+  const { mutate: updateCartItem } = useAddItemToCartMutation();
+
   return (
     <View style={styles.container}>
-      <IconSvg
-        icon={MinusCartIcon}
-        size={40}
-        showBackground={false}
-      />
-      <TextZSR fontWeight='SemiBold'>3</TextZSR>
-      <IconSvg
-        icon={PlusCartIcon}
-        size={40}
-        showBackground={false}
-      />
+      <Pressable onPress={() => updateCartItem({ item, qty: -1 })} >
+        <IconSvg
+          icon={MinusCartIcon}
+          size={40}
+          showBackground={false}
+        />
+      </Pressable>
+
+      <TextZSR fontWeight='SemiBold'>{item.qty}</TextZSR>
+      <Pressable onPress={() => updateCartItem({ item, qty: 1 })} >
+        <IconSvg
+          icon={PlusCartIcon}
+          size={40}
+          showBackground={false}
+        />
+      </Pressable>
     </View>
   )
 }

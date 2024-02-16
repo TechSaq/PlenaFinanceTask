@@ -8,9 +8,10 @@ import { TextZSR } from '../../../library'
 import CartItemQuantity from './CartItemQuantity'
 import { useNavigation } from '@react-navigation/native'
 import { SCREEN_CONSTANTS } from '../../../navigation/utils/constants'
+import { CartItem } from '../screens/CartScreen'
 
 type CartListItemProps = {
-  item: Product
+  item: CartItem
 }
 
 const CartListItem = ({ item }: CartListItemProps) => {
@@ -36,7 +37,7 @@ const CartListItem = ({ item }: CartListItemProps) => {
         <TextZSR fontSize={14}>${item.price}</TextZSR>
       </Pressable>
 
-      <CartItemQuantity />
+      <CartItemQuantity item={item} />
     </View>
   )
 }

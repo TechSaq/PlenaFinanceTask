@@ -3,10 +3,11 @@ import { Pressable, View } from 'react-native'
 import React from 'react'
 import { IconSvg, TextZSR } from '../library'
 import { BasketIcon } from '../assets/icons'
-import { makeStyles } from '../hooks'
+import { makeStyles, useRefreshOnFocus } from '../hooks'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { useNavigation } from '@react-navigation/native'
 import { SCREEN_CONSTANTS } from '../navigation/utils/constants'
+import { useCartItemsCount } from '../features/cart/query'
 
 type HeaderBasketIconProps = {
   active?: boolean
@@ -20,11 +21,12 @@ const HeaderBasketIcon = ({ active = true }: HeaderBasketIconProps) => {
 
   const navigation = useNavigation();
 
-  const navigateToCart = () => {
+  const { data: count, refetch } = useCartItemsCount();
+  useRefreshOnFocus(refetch);
 
+  const navigateToCart = () => {
     // TODO: better typescript
     navigation.navigate(SCREEN_CONSTANTS.Cart);
-
   }
 
   return (
@@ -36,9 +38,13 @@ const HeaderBasketIcon = ({ active = true }: HeaderBasketIconProps) => {
         containerStyle={styles.basketIcon}
         showBackground={false}
       />
-      <View style={styles.badgeWrapper} >
-        <TextZSR fontSize={12} themeKey='BLACK_1'>3</TextZSR>
-      </View>
+      {
+        count
+          ? <View style={styles.badgeWrapper}>
+            <TextZSR fontSize={12} themeKey='BLACK_1'>{count}</TextZSR>
+          </View>
+          : null
+      }
     </Pressable>
   )
 }

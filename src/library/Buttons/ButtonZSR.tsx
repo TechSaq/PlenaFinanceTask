@@ -8,12 +8,16 @@ type ButtonZSRProps = PressableProps & {
   mode?: 'outline' | 'contained'
 };
 
-const ButtonZSR = ({ children, mode = 'contained' }: ButtonZSRProps) => {
+const ButtonZSR = ({ children, mode = 'contained', ...rest }: ButtonZSRProps) => {
 
   const styles = useStyles();
 
   return (
-    <Pressable style={[styles.container, styles[mode]]}>
+    <Pressable
+      style={({ pressed }) => [styles.container, styles[mode], pressed ? styles.pressed : undefined]
+      }
+      {...rest}
+    >
       <TextZSR
         fontSize={14}
         fontWeight='SemiBold'
@@ -44,5 +48,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     textAlign: 'center'
+  },
+  pressed: {
+    opacity: 0.8
   }
 }))

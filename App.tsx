@@ -8,6 +8,7 @@ import { ReactQueryProvider } from './src/services/react-query';
 import { AppStateStatus, Platform } from 'react-native';
 import { focusManager } from '@tanstack/react-query';
 import { useAppState, useOnlineManager } from './src/hooks';
+import Toast from 'react-native-toast-message';
 
 function onAppStateChange(status: AppStateStatus) {
   // React Query already supports in web browser refetch on window focus by default
@@ -31,6 +32,7 @@ function App() {
           </ReactQueryProvider>
         </ThemeProvider>
       </SafeAreaView>
+      <Toast />
     </SafeAreaProvider>
   );
 }

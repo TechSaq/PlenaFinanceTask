@@ -3,23 +3,31 @@ import React from 'react'
 import { makeStyles } from '../../../hooks';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { ButtonZSR, Spacer, TextZSR } from '../../../library';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LocalStorageConstants } from '../../../utils/LocalStorageHelpers';
+import { getTotal } from '../../../utils/helpers';
 
-const CartAmountCard = () => {
+const CartAmountCard = ({ subtotal }: { subtotal: string }) => {
 
   const styles = useStyles();
+
+  const delivery = Number(subtotal) ? '3.00' : '0.00';
+  const total = getTotal([subtotal, delivery]);
 
   return (
     <View style={styles.container}>
 
-      <AmountRow label='Subtotal' amount='35.96' />
+      <AmountRow label='Subtotal' amount={subtotal} />
       <Spacer />
-      <AmountRow label='Delivery' amount='2.00' />
+      <AmountRow label='Delivery' amount={delivery} />
       <Spacer />
-      <AmountRow label='Total' amount='37.96' />
+      <AmountRow label='Total' amount={total} />
 
       <Spacer spacing={32} />
 
-      <ButtonZSR>Proceed To checkout</ButtonZSR>
+      <ButtonZSR>
+        Proceed To checkout
+      </ButtonZSR>
 
     </View>
   )

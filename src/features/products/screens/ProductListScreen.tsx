@@ -12,7 +12,7 @@ const ProductListScreen = () => {
   const styles = useStyles();
 
   return (
-    <ScreenView>
+    <ScreenView scrollView >
       <HomeHeader />
       <View style={styles.topContainer}>
         <SearchInput />
@@ -32,7 +32,7 @@ const ProductListScreen = () => {
           <View>
             <TextZSR fontSize={11} fontWeight='Bold' themeKey='TAB_BAR_TEXT'>WITHIN</TextZSR>
             <View style={styles.dropdownContainer}>
-              <TextZSR fontSize={14} themeKey='BLACK_1'>1 hour</TextZSR>
+              <TextZSR fontSize={14} themeKey='BLACK_1'>1 Hour</TextZSR>
               <IconSvg icon={DropdownIcon} size={11} active showBackground={false} />
             </View>
           </View>

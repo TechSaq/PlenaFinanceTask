@@ -1,6 +1,7 @@
+//@ts-nocheck
 import { View, Text, Pressable } from 'react-native';
 import React from 'react';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Product } from '../components/ProductListing';
 import { ButtonZSR, IconSvg, ScreenView, Spacer, TextZSR } from '../../../library';
 import { makeStyles } from '../../../hooks';
@@ -9,6 +10,9 @@ import StarRating from 'react-native-star-rating-widget';
 import { ProductGalleryCarousel } from '../components';
 import { FavouriteProductIcon } from '../../../assets/icons';
 import { getDiscount } from '../../../utils/helpers';
+import { useAddItemToCartMutation } from '../../cart/query';
+import { SCREEN_CONSTANTS } from '../../../navigation/utils/constants';
+import { getItemsFromCartLS } from '../../../utils/LocalStorageHelpers';
 
 const ProductDetailsScreen = () => {
 
@@ -17,11 +21,35 @@ const ProductDetailsScreen = () => {
   const { params } = useRoute();
   const { product } = params as { product: Product };
 
+  const navigation = useNavigation();
+
+  const { mutate: addItemToCart } = useAddItemToCartMutation();
+
   if (!product) {
     return <TextZSR>Product details not found</TextZSR>
   }
 
   const discount = getDiscount(product.price, product.discountPercentage);
+
+  const handleAddToCart = () => {
+    addItemToCart({ item: product });
+  }
+
+  const handleBuyNow = async () => {
+
+    const itemsLS = await getItemsFromCartLS();
+
+    const isItemInCart = itemsLS.find(i => i.id === product.id);
+
+    if (isItemInCart) {
+      navigation.navigate(SCREEN_CONSTANTS.Cart);
+    } else {
+      handleAddToCart();
+      navigation.navigate(SCREEN_CONSTANTS.Cart);
+    }
+
+  }
+
 
   return (
     <ScreenView style={styles.container}>
@@ -80,8 +108,8 @@ const ProductDetailsScreen = () => {
 
         {/* buttons */}
         <View style={styles.buttonWrapper} >
-          <ButtonZSR mode='outline'>Add To Cart</ButtonZSR>
-          <ButtonZSR>Buy Now</ButtonZSR>
+          <ButtonZSR mode='outline' onPress={handleAddToCart} >Add To Cart</ButtonZSR>
+          <ButtonZSR onPress={handleBuyNow} >Buy Now</ButtonZSR>
         </View>
 
         <Spacer spacing={32} />

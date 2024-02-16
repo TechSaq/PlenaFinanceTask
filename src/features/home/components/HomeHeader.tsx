@@ -17,7 +17,7 @@ const HomeHeader = () => {
         themeKey='BLACK_1'
         fontWeight='SemiBold'
       >
-        Hey, Rahul
+        Hey, Saquib
       </TextZSR>
 
       <HeaderBasketIcon />
